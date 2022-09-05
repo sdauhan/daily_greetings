@@ -68,7 +68,7 @@ def get_baby_birth_count():
     count = (today - baby_date).days
     return "芃芃来到这个世界已经 %d天啦!" %(count)
   else:
-	count = (baby_date-today).days
+    count = (baby_date-today).days
 	return "芃芃还有 %d 天来到我们身边!嘻嘻(#^.^#)" %(count)
 
 # 各种倒计时
