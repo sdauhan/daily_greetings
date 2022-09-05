@@ -19,6 +19,7 @@ app_secret = os.getenv('APP_SECRET')
 
 user_ids = os.getenv('USER_ID', '').split("\n")
 template_id = os.getenv('TEMPLATE_ID')
+baby_birth = os.getenv('BABY_BIRTH')
 
 if app_id is None or app_secret is None:
   print('请设置 APP_ID 和 APP_SECRET')
@@ -57,6 +58,18 @@ def get_memorial_days_count():
     return 0
   delta = today - datetime.strptime(start_date, "%Y-%m-%d")
   return delta.days
+
+# baby 降临
+def get_baby_birth_count():
+  baby_date = datetime.strptime(baby_birth, "%Y-%m-%d")
+  if today == baby_date :
+    return "恭喜你，芃芃来到这个世界啦，辛苦啦"
+  elif today > baby_date :
+    count = (today - baby_date).days
+    return "芃芃来到这个世界已经 %d天啦!" %(count)
+  else:
+	count = (baby_date-today).days
+	return "芃芃还有 %d 天来到我们身边!嘻嘻(#^.^#)" %(count)
 
 # 各种倒计时
 def get_counter_left(aim_date):
@@ -148,6 +161,10 @@ data = {
   "love_days": {
     "value": get_memorial_days_count(),
     "color": get_random_color()
+  },
+  "baby_birth": {
+      "value": get_baby_birth_count(),
+      "color": get_random_color()
   },
   "words": {
     "value": get_words(),
