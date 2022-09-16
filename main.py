@@ -81,7 +81,8 @@ def get_counter_left(aim_date):
     next = datetime.strptime(str(date.today().year) + "-" + aim_date, "%Y-%m-%d")
   elif re.match(r'^\d{2,4}\-\d{1,2}\-\d{1,2}$', aim_date):
     next = datetime.strptime(aim_date, "%Y-%m-%d")
-    next = next.replace(nowtime.year)
+    if next > nowtime:
+      return (next - today).days
   else:
     print('日期格式不符合要求')
     
